@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopingapi/constant/colors_app.dart';
 import 'package:get/get.dart';
+import 'package:shopingapi/pref/shared_pref_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,7 +15,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), (() {
-      Get.offNamed('/login_screen');
+      String route =
+          SharedPrefController().loggedIn ? '/users_screen' : '/login_screen';
+      Get.offNamed(route);
     }));
   }
 

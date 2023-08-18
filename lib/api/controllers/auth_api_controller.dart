@@ -4,6 +4,7 @@ import 'package:shopingapi/api/api_setting.dart';
 import 'package:shopingapi/api/controllers/api_helper.dart';
 import 'package:shopingapi/model/student.dart';
 import 'package:http/http.dart' as http;
+import 'package:shopingapi/pref/shared_pref_controller.dart';
 
 class AuthApiController with ApiHelper {
   Future<ApiResponse> register({required Student student}) async {
@@ -34,6 +35,7 @@ class AuthApiController with ApiHelper {
       if (response.statusCode == 200) {
         var jsonObject = jsonResponse['object'];
         Student student = Student.fromJson(jsonObject);
+        SharedPrefController().save(student: student);
       }
       return ApiResponse(
           message: jsonResponse['message'], status: jsonResponse['status']);
