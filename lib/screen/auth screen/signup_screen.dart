@@ -70,35 +70,78 @@ class _SignupScreenState extends State<SignupScreen> {
                           hinttext: "Your password",
                           icon: Icons.lock),
                       const SizedBox(
-                        height: 40,
+                        height: 20,
                       ),
+                      // Container(
+                      //   // width: double.infinity,
+                      //   // height: 50,
+                      //   // color: Colors.blueGrey,
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.center,
+                      //     children: [
+                      //       RadioListTile(
+                      //         title: const Text('Male'),
+                      //         value: 'M',
+                      //         groupValue: _gender,
+                      //         onChanged: (String? value) {
+                      //           if (value != null) {
+                      //             setState(
+                      //               () => _gender = 'M',
+                      //             );
+                      //           }
+                      //         },
+                      //       ),
+                      //       RadioListTile(
+                      //         title: const Text('Female'),
+                      //         value: 'F',
+                      //         groupValue: _gender,
+                      //         onChanged: (String? value) {
+                      //           if (value != null) {
+                      //             setState(
+                      //               () => _gender = 'F',
+                      //             );
+                      //           }
+                      //         },
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),
                       Row(
                         children: [
-                          RadioListTile(
-                            title: const Text('Male'),
-                            value: 'M',
-                            groupValue: _gender,
-                            onChanged: (String? value) {
-                              if (value != null) {
-                                setState(
-                                  () => _gender = 'M',
-                                );
-                              }
-                            },
+                          Expanded(
+                            child: RadioListTile(
+                              activeColor: AppColors.KPrimaryColor,
+                              title: const Text('Male'),
+                              value: 'M',
+                              groupValue: _gender,
+                              onChanged: (String? value) {
+                                if (value != null) {
+                                  setState(
+                                    () => _gender = 'M',
+                                  );
+                                }
+                              },
+                            ),
                           ),
-                          RadioListTile(
-                            title: const Text('Female'),
-                            value: 'F',
-                            groupValue: _gender,
-                            onChanged: (String? value) {
-                              if (value != null) {
-                                setState(
-                                  () => _gender = 'F',
-                                );
-                              }
-                            },
+                          Expanded(
+                            child: RadioListTile(
+                              activeColor: AppColors.KPrimaryColor,
+                              title: const Text('Female'),
+                              value: 'F',
+                              groupValue: _gender,
+                              onChanged: (String? value) {
+                                if (value != null) {
+                                  setState(
+                                    () => _gender = 'F',
+                                  );
+                                }
+                              },
+                            ),
                           )
                         ],
+                      ),
+                      const SizedBox(
+                        height: 20,
                       ),
                       CustomFormButton(
                           innerText: 'Signup'.toUpperCase(),
@@ -147,11 +190,13 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  Future<void> _signup() async {
-    ApiResponse apiResponse =
-        await AuthApiController().register(student: student);
-    if (apiResponse.status) Get.back();
-    Get.snackbar('', apiResponse.message);
+  Future _signup() async {
+    print('============================');
+    print(_gender);
+    bool apiResponse =
+        await AuthApiController().register(context, student: student);
+    if (apiResponse) Get.back();
+    print('-----------------------------------');
   }
 
   Student get student {

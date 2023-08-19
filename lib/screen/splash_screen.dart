@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:shopingapi/constant/colors_app.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), (() {
+    Future.delayed(const Duration(seconds: 8), (() {
       String route =
           SharedPrefController().loggedIn ? '/users_screen' : '/login_screen';
       Get.offNamed(route);
@@ -32,8 +33,20 @@ class _SplashScreenState extends State<SplashScreen> {
               end: AlignmentDirectional.bottomEnd,
               colors: [AppColors.KPrimaryColor, AppColors.KSupColor]),
         ),
-        child: const Text('Shoping',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+        child: DefaultTextStyle(
+          style: const TextStyle(
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+          child: AnimatedTextKit(
+            animatedTexts: [
+              WavyAnimatedText('Shoply'),
+              WavyAnimatedText('Shop And Enjoy'),
+            ],
+            // isRepeatingAnimation: true,
+          ),
+        ),
       ),
     );
   }

@@ -14,7 +14,7 @@ class SharedPrefController {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  // save  , clear  ,  isLoggedIn   ,    getByKey<T>   ,  getToken
+  //    save
 
   Future<void> save({required Student student}) async {
     _sharedPreferences.setBool(PrefKey.isLoggedIn.name, true);
@@ -25,10 +25,16 @@ class SharedPrefController {
     _sharedPreferences.setString(PrefKey.token.name, 'Bearer ${student.token}');
   }
 
+//  clear
+
   Future<bool> clear() async => _sharedPreferences.clear();
+
+//    isLoggedIn
 
   bool get loggedIn =>
       _sharedPreferences.getBool(PrefKey.isLoggedIn.name) ?? false;
+
+//    getByKey<T>
 
   T? getByKey<T>({required String key}) {
     if (_sharedPreferences.containsKey(key)) {
@@ -36,6 +42,8 @@ class SharedPrefController {
     }
     return null;
   }
+
+//     getToken
 
   String get token => _sharedPreferences.getString(PrefKey.token.name) ?? '';
 }

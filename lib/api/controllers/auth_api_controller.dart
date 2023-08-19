@@ -1,26 +1,41 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:shopingapi/api/api_response.dart';
 import 'package:shopingapi/api/api_setting.dart';
 import 'package:shopingapi/api/controllers/api_helper.dart';
 import 'package:shopingapi/model/student.dart';
 import 'package:http/http.dart' as http;
 import 'package:shopingapi/pref/shared_pref_controller.dart';
+import 'package:shopingapi/util/helper.dart';
 
-class AuthApiController with ApiHelper {
-  Future<ApiResponse> register({required Student student}) async {
-    Uri uri = Uri.parse(ApiSettings.register);
-    var response = await http.post(uri, body: {
-      "full_name": student.fullName,
-      "email": student.email,
-      "password": student.password,
-      "gender": student.gender
-    });
-    if (response.statusCode == 201 || response.statusCode == 400) {
+class AuthApiController with ApiHelper, Helper {
+  Future<bool> register(BuildContext context,
+      {required Student student}) async {
+    try {
+      Uri uri = Uri.parse(ApiSettings.register);
+      var response = await http.post(uri, body: {
+        "full_name": student.fullName,
+        "email": student.email,
+        "password": student.password,
+        "gender": student.gender
+      });
       var jsonResponse = jsonDecode(response.body);
-      return ApiResponse(
-          message: jsonResponse['message'], status: jsonResponse['status']);
+      if (response.statusCode == 201) {
+        // ignore: use_build_context_synchronously
+        ShowSnackBar(context,
+            title: jsonResponse['message'], isError: jsonResponse['status']);
+        return true;
+      }
+      // ignore: use_build_context_synchronously
+      ShowSnackBar(context,
+          title: jsonResponse['message'], isError: jsonResponse['status']);
+      return false;
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      ShowSnackBar(context,
+          title: 'Error Server Please Try agan', isError: false);
+      return false;
     }
-    return failedResponse;
   }
 
   Future<ApiResponse> login(
