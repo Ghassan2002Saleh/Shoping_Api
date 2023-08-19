@@ -111,11 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _login() async {
-    ApiResponse apiResponse = await AuthApiController().login(
+    var apiResponse = await AuthApiController().login(context,
         email: emailContrroller.text, password: passwordContrroller.text);
-    if (apiResponse.status) {
-      Get.offNamed('/users_screen');
-    }
-    Get.snackbar('', apiResponse.message);
+    if (apiResponse) Get.offNamed('/users_screen');
   }
 }

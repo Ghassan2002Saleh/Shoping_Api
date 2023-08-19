@@ -38,23 +38,35 @@ class AuthApiController with ApiHelper, Helper {
     }
   }
 
-  Future<ApiResponse> login(
+  Future<bool> login(BuildContext context,
       {required String email, required String password}) async {
-    Uri uri = Uri.parse(ApiSettings.login);
-    var response = await http.post(uri, body: {
-      "email": email,
-      "password": password,
-    });
-    if (response.statusCode == 200 || response.statusCode == 400) {
+    try {
+      Uri uri = Uri.parse(ApiSettings.login);
+      var response = await http.post(uri, body: {
+        "email": email,
+        "password": password,
+      });
       var jsonResponse = jsonDecode(response.body);
-      if (response.statusCode == 200) {
-        var jsonObject = jsonResponse['object'];
-        Student student = Student.fromJson(jsonObject);
-        SharedPrefController().save(student: student);
+      if (response.statusCode == 200 || response.statusCode == 400) {
+        if (response.statusCode == 200) {
+          var jsonObject = jsonResponse['object'];
+          Student student = Student.fromJson(jsonObject);
+          SharedPrefController().save(student: student);
+        }
+        // ignore: use_build_context_synchronously
+        ShowSnackBar(context,
+            title: jsonResponse['message'], isError: jsonResponse['status']);
+        return false;
       }
-      return ApiResponse(
-          message: jsonResponse['message'], status: jsonResponse['status']);
+      // ignore: use_build_context_synchronously
+      ShowSnackBar(context,
+          title: 'Error Server Please Try agan', isError: false);
+      return false;
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      ShowSnackBar(context,
+          title: 'Error Server Please Try agan', isError: false);
+      return false;
     }
-    return failedResponse;
   }
 }

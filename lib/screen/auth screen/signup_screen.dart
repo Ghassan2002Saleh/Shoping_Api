@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shopingapi/api/api_response.dart';
 import 'package:shopingapi/api/controllers/auth_api_controller.dart';
 import 'package:shopingapi/constant/colors_app.dart';
 import 'package:shopingapi/model/student.dart';
@@ -191,12 +190,9 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   Future _signup() async {
-    print('============================');
-    print(_gender);
     bool apiResponse =
         await AuthApiController().register(context, student: student);
-    if (apiResponse) Get.back();
-    print('-----------------------------------');
+    if (apiResponse) Get.offNamed('/login_screen');
   }
 
   Student get student {
