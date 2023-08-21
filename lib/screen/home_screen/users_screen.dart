@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shopingapi/api/controllers/auth_api_controller.dart';
 import 'package:shopingapi/api/controllers/users_api_controller.dart';
 import 'package:shopingapi/constant/colors_app.dart';
 import 'package:shopingapi/model/user.dart';
-import 'package:shopingapi/pref/shared_pref_controller.dart';
 
 class UsersScreen extends StatelessWidget {
   const UsersScreen({super.key});
@@ -18,7 +18,7 @@ class UsersScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () async {
-                await SharedPrefController().clear();
+                await AuthApiController().logout(context);
                 Get.offAllNamed('/splash_screen');
               },
               icon: const Icon(Icons.clear))

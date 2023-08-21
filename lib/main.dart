@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shopingapi/screen/auth%20screen/forgot_password_screen.dart';
 import 'package:shopingapi/screen/auth%20screen/login_screen.dart';
+import 'package:shopingapi/screen/auth%20screen/reset_password_screen.dart';
 import 'package:shopingapi/screen/auth%20screen/signup_screen.dart';
 import 'package:shopingapi/constant/colors_app.dart';
 import 'package:shopingapi/constant/constants.dart';
@@ -51,6 +53,7 @@ class MyApp extends StatelessWidget {
         '/users_screen': (context) => const UsersScreen(),
         '/login_screen': (context) => const LoginScreen(),
         '/signup_screen': (context) => const SignupScreen(),
+        '/forgot_password_screen': (context) => const ForgotPasswordScreen(),
       },
     );
   }

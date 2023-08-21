@@ -131,7 +131,7 @@ mixin Helper {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(
-              isError ?  Icons.verified_outlined: Icons.do_disturb,
+              isError ? Icons.do_disturb : Icons.verified_outlined,
               color: AppColors.whiteColor,
             ),
             const SizedBox(
@@ -149,7 +149,7 @@ mixin Helper {
         ),
         messageText: const SizedBox(),
         snackStyle: SnackStyle.GROUNDED,
-        backgroundColor: isError ? AppColors.greenColor : AppColors.redColor,
+        backgroundColor: isError ? AppColors.redColor : AppColors.greenColor,
         borderRadius: 0,
         margin: const EdgeInsets.all(0),
         isDismissible: false);

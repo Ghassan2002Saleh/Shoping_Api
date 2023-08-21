@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shopingapi/api/api_response.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shopingapi/api/controllers/auth_api_controller.dart';
+import 'package:shopingapi/screen/auth%20screen/reset_password_screen.dart';
 import 'package:shopingapi/screen/auth%20screen/signup_screen.dart';
-
 import 'package:shopingapi/constant/colors_app.dart';
+import 'package:shopingapi/util/helper.dart';
 import 'package:shopingapi/widgets/custom_form_button.dart';
 import 'package:shopingapi/widgets/custom_text_field.dart';
 import 'package:shopingapi/widgets/page_header.dart';
 import 'package:shopingapi/widgets/page_heading.dart';
+import 'package:shopingapi/widgets/widget_loadidng.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> with Helper {
   TextEditingController emailContrroller = TextEditingController();
   TextEditingController passwordContrroller = TextEditingController();
 
@@ -77,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             const Text(
                               'Don\'t have an account ? ',
                               style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 14,
                                   color: AppColors.KFontColor,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -88,17 +90,24 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: const Text(
                                 'Sign-up',
                                 style: TextStyle(
-                                    fontSize: 15,
-                                    color: AppColors.KSupColor,
-                                    fontWeight: FontWeight.bold),
+                                  fontSize: 13,
+                                  color: AppColors.KSupColor,
+                                ),
                               ),
                             ),
                           ],
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
+                      TextButton(
+                          onPressed: () {
+                            Get.toNamed('/forgot_password_screen');
+                          },
+                          child: Text('Forgot your password ?',
+                              style: GoogleFonts.montserrat(
+                                  color: AppColors.KSupColor, fontSize: 13)))
                     ],
                   ),
                 ),
@@ -111,8 +120,15 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _login() async {
-    var apiResponse = await AuthApiController().login(context,
-        email: emailContrroller.text, password: passwordContrroller.text);
-    if (apiResponse) Get.offNamed('/users_screen');
+    if (emailContrroller.text.isNotEmpty &&
+        passwordContrroller.text.isNotEmpty) {
+      WidgetLoadding(context);
+      var apiResponse = await AuthApiController().login(context,
+          email: emailContrroller.text, password: passwordContrroller.text);
+      Navigator.pop(context);
+      if (apiResponse) Get.offNamed('/users_screen');
+    } else {
+      ShowSnackBar(context, title: 'ادخل البريد او كلمة المرور');
+    }
   }
 }

@@ -3,4 +3,8 @@ class ApiSettings {
   static const String users = '${_baseUrl}users';
   static const String register = '${_baseUrl}students/auth/register';
   static const String login = '${_baseUrl}students/auth/login';
+  static const String logout = '${_baseUrl}students/auth/logout';
+  static const String forgotPassword =
+      '${_baseUrl}students/auth/forget-password';
+  static const String resetPassword = '${_baseUrl}students/auth/reset-password';
 }

@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopingapi/model/student.dart';
 
-enum PrefKey { id, fullName, email, gender, token, isLoggedIn }
+enum PrefKey { id, fullName, email, gender, token, isLoggedIn, code }
 
 class SharedPrefController {
   static SharedPrefController? _instance;
@@ -46,4 +46,8 @@ class SharedPrefController {
 //     getToken
 
   String get token => _sharedPreferences.getString(PrefKey.token.name) ?? '';
+
+  Future<void> getCode({required String code}) async {
+    _sharedPreferences.setString(PrefKey.code.name, code);
+  }
 }

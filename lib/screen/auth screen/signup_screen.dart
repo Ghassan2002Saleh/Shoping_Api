@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:shopingapi/api/controllers/auth_api_controller.dart';
 import 'package:shopingapi/constant/colors_app.dart';
 import 'package:shopingapi/model/student.dart';
+import 'package:shopingapi/util/helper.dart';
 import 'package:shopingapi/widgets/custom_form_button.dart';
 import 'package:shopingapi/widgets/custom_text_field.dart';
 import 'package:shopingapi/widgets/page_header.dart';
 import 'package:shopingapi/widgets/page_heading.dart';
+import 'package:shopingapi/widgets/widget_loadidng.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -15,7 +17,7 @@ class SignupScreen extends StatefulWidget {
   State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _SignupScreenState extends State<SignupScreen> with Helper {
   TextEditingController fullNameContrroller = TextEditingController();
   TextEditingController emailContrroller = TextEditingController();
   TextEditingController passwordContrroller = TextEditingController();
@@ -71,40 +73,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      // Container(
-                      //   // width: double.infinity,
-                      //   // height: 50,
-                      //   // color: Colors.blueGrey,
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.center,
-                      //     children: [
-                      //       RadioListTile(
-                      //         title: const Text('Male'),
-                      //         value: 'M',
-                      //         groupValue: _gender,
-                      //         onChanged: (String? value) {
-                      //           if (value != null) {
-                      //             setState(
-                      //               () => _gender = 'M',
-                      //             );
-                      //           }
-                      //         },
-                      //       ),
-                      //       RadioListTile(
-                      //         title: const Text('Female'),
-                      //         value: 'F',
-                      //         groupValue: _gender,
-                      //         onChanged: (String? value) {
-                      //           if (value != null) {
-                      //             setState(
-                      //               () => _gender = 'F',
-                      //             );
-                      //           }
-                      //         },
-                      //       )
-                      //     ],
-                      //   ),
-                      // ),
                       Row(
                         children: [
                           Expanded(
@@ -190,9 +158,17 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   Future _signup() async {
-    bool apiResponse =
-        await AuthApiController().register(context, student: student);
-    if (apiResponse) Get.offNamed('/login_screen');
+    if (emailContrroller.text.isNotEmpty &&
+        passwordContrroller.text.isNotEmpty &&
+        fullNameContrroller.text.isNotEmpty) {
+      WidgetLoadding(context);
+      bool apiResponse =
+          await AuthApiController().register(context, student: student);
+      Navigator.pop(context);
+      if (apiResponse) Get.offNamed('/login_screen');
+    } else {
+      ShowSnackBar(context, title: 'ادخل البريد او كلمة المرور');
+    }
   }
 
   Student get student {
