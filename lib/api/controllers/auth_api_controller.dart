@@ -1,14 +1,13 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopingapi/api/api_setting.dart';
+import 'package:shopingapi/api/controllers/api_helper.dart';
 import 'package:shopingapi/model/student.dart';
 import 'package:http/http.dart' as http;
 import 'package:shopingapi/pref/shared_pref_controller.dart';
 import 'package:shopingapi/util/helper.dart';
 
-class AuthApiController with Helper {
+class AuthApiController with Helper, ApiHelper {
   Future<bool> register(BuildContext context,
       {required Student student}) async {
     try {
@@ -74,10 +73,7 @@ class AuthApiController with Helper {
   Future<bool> logout(BuildContext context) async {
     try {
       Uri uri = Uri.parse(ApiSettings.logout);
-      var response = await http.get(uri, headers: {
-        HttpHeaders.authorizationHeader: SharedPrefController().token,
-        HttpHeaders.acceptHeader: 'application/json',
-      });
+      var response = await http.get(uri, headers: headers);
       var jsonResponse = jsonDecode(response.body);
       if (response.statusCode == 200 || response.statusCode == 400) {
         await SharedPrefController().clear();
@@ -163,4 +159,6 @@ class AuthApiController with Helper {
       return false;
     }
   }
+
+
 }

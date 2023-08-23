@@ -7,4 +7,5 @@ class ApiSettings {
   static const String forgotPassword =
       '${_baseUrl}students/auth/forget-password';
   static const String resetPassword = '${_baseUrl}students/auth/reset-password';
+  static const String image = '${_baseUrl}student/images/{id';
 }

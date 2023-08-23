@@ -17,6 +17,11 @@ class UsersScreen extends StatelessWidget {
         backgroundColor: AppColors.KPrimaryColor,
         actions: [
           IconButton(
+              onPressed: () {
+                Get.toNamed('/images_screen');
+              },
+              icon: const Icon(Icons.camera_alt)),
+          IconButton(
               onPressed: () async {
                 await AuthApiController().logout(context);
                 Get.offAllNamed('/splash_screen');
