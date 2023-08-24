@@ -17,12 +17,14 @@ class ImagesGetxController extends GetxController {
   void readImages() async {
     loading.value = true;
     images.value = await _apiContrroller.readImage();
-    loading.value = true;
+    loading.value = false;
   }
 
   Future<void> deleteImage(BuildContext context, {required int index}) async {
+    loading.value = true;
     var apiResponse =
         await _apiContrroller.deleteImage(context, id: images[index].id);
     if (apiResponse) images.removeAt(index);
+    loading.value = false;
   }
 }

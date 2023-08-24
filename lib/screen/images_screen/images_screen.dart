@@ -34,6 +34,7 @@ class _ImagesScreenState extends State<ImagesScreen> with Helper {
               child: CircularProgressIndicator(),
             );
           } else if (_getxController.images.isNotEmpty) {
+            print('object');
             return GridView.builder(
               itemCount: _getxController.images.length,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -58,8 +59,9 @@ class _ImagesScreenState extends State<ImagesScreen> with Helper {
                       Align(
                         alignment: AlignmentDirectional.bottomEnd,
                         child: Container(
+                          padding: const EdgeInsets.only(left: 10),
                           width: double.infinity,
-                          color: Colors.black45,
+                          color: Colors.white.withOpacity(0.93),
                           child: Row(
                             children: [
                               Expanded(
@@ -67,7 +69,8 @@ class _ImagesScreenState extends State<ImagesScreen> with Helper {
                                   _getxController.images[i].image,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.montserrat(),
+                                  style: GoogleFonts.montserrat(
+                                      color: Colors.black),
                                 ),
                               ),
                               IconButton(
@@ -100,6 +103,9 @@ class _ImagesScreenState extends State<ImagesScreen> with Helper {
   }
 
   Future<void> _deleteImage({required int index}) async {
-    await _getxController.deleteImage(context, index: index);
+    print(_getxController.images[index].imageUrl);
+    // print('----------------------------');
+    // if (_getxController.loading.isTrue) {}
+    // await _getxController.deleteImage(context, index: index);
   }
 }

@@ -30,7 +30,7 @@ class UsersScreen extends StatelessWidget {
         ],
       ),
       body: FutureBuilder<List<User>>(
-        future: UserApiController().read(),
+        future: UserApiController().readUsers(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -44,10 +44,10 @@ class UsersScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(5.0),
                   child: ListTile(
                     title: Text(snapshot.data![i].firstName),
-                    leading: const Icon(Icons.person),
-                    // leading: CircleAvatar(
-                    //     radius: 30,
-                    //     backgroundImage: NetworkImage(snapshot.data![i].image)),
+                    leading: CircleAvatar(
+                      radius: 30,
+                      backgroundImage: NetworkImage(snapshot.data![i].image),
+                    ),
                     subtitle: Text(snapshot.data![i].email),
                   ),
                 );

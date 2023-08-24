@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shopingapi/api/api_setting.dart';
-import 'package:shopingapi/api/controllers/api_helper.dart';
+import 'package:shopingapi/api/api_helper.dart';
 import 'package:shopingapi/model/student.dart';
 import 'package:http/http.dart' as http;
 import 'package:shopingapi/pref/shared_pref_controller.dart';
@@ -82,11 +82,12 @@ class AuthApiController with Helper, ApiHelper {
         ShowSnackBar(context,
             title: response.statusCode == 200
                 ? jsonResponse['message']
-                : 'logged out successeflly',
+                : 'logged out successefully',
             isError: response.statusCode == 200 ? false : true);
       } else {
         // ignore: use_build_context_synchronously
-        ShowSnackBar(context, title: 'logged out successeflly', isError: true);
+        ShowSnackBar(context,
+            title: 'Error Server Please Try Agan', isError: false);
       }
 
       return jsonResponse['status'];
@@ -159,6 +160,4 @@ class AuthApiController with Helper, ApiHelper {
       return false;
     }
   }
-
-
 }
