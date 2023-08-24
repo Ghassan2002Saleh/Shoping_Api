@@ -103,9 +103,7 @@ class _ImagesScreenState extends State<ImagesScreen> with Helper {
   }
 
   Future<void> _deleteImage({required int index}) async {
-    print(_getxController.images[index].imageUrl);
-    // print('----------------------------');
-    // if (_getxController.loading.isTrue) {}
-    // await _getxController.deleteImage(context, index: index);
+    if (_getxController.loading.isTrue) {}
+    await _getxController.deleteImage(context, index: index);
   }
 }
