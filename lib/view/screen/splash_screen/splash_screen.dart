@@ -16,8 +16,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), (() {
-      String route =
-          SharedPrefController().loggedIn ? '/users_screen' : '/login_screen';
+      String route = SharedPrefController().loggedIn
+          ? '/BottomNavigationBar_screen'
+          : '/login_screen';
       Get.offNamed(route);
     }));
   }
@@ -41,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           child: AnimatedTextKit(
             animatedTexts: [
-              WavyAnimatedText('Shoply'),
+              WavyAnimatedText('My Task'),
               // WavyAnimatedText('Shop And Enjoy'),
             ],
             // isRepeatingAnimation: true,

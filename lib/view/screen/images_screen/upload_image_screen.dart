@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shopingapi/constant/colors_app.dart';
 
 class UplaoadImageScreen extends StatefulWidget {
   const UplaoadImageScreen({super.key});
@@ -21,11 +22,26 @@ class _UplaoadImageScreenState extends State<UplaoadImageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Upload Image'),
+        leading: const Icon(
+          Icons.arrow_back_rounded,
+          color: AppColors.whiteColor,
+        ),
+        backgroundColor: AppColors.KPrimaryColor,
+        title: const Text(
+          'Upload Image',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: AppColors.whiteColor,
+          ),
+        ),
         actions: [
           IconButton(
               onPressed: () async => await getImageFromGallary(),
-              icon: const Icon(Icons.upload))
+              icon: const Icon(
+                Icons.upload,
+                color: AppColors.whiteColor,
+              ))
         ],
       ),
       body: Column(
@@ -48,14 +64,24 @@ class _UplaoadImageScreenState extends State<UplaoadImageScreen> {
                       iconSize: 70,
                       color: Colors.grey,
                     )),
-          ElevatedButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.camera_alt),
-            label: Text(
-              'Upload'.toUpperCase(),
-            ),
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(double.infinity, 50),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: ElevatedButton.icon(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.camera_alt,
+                color: AppColors.whiteColor,
+              ),
+              label: Text(
+                'Upload'.toUpperCase(),
+                style: const TextStyle(
+                  color: AppColors.whiteColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 50),
+              ),
             ),
           )
         ],

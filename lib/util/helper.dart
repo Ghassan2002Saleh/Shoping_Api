@@ -27,8 +27,10 @@ mixin Helper {
         ));
   }
 
-  void showMyDiloag(
-      {required String text, Color? backgroundColor, Function()? onPressed}) {
+  void showMyDiloag({
+    required String text,
+    Color? backgroundColor,
+  }) {
     Get.defaultDialog(
       backgroundColor: AppColors.whiteColor,
       radius: 8,
@@ -69,6 +71,29 @@ mixin Helper {
       //     Get.back();
       //   },
       // ),
+    );
+  }
+
+  void myDiloag(BuildContext context,
+      {Widget widget = const Padding(padding: EdgeInsets.zero),
+      String title = '',
+      String textCancel = "cancel",
+      String textConfirm = "ok",
+      Color? backgroundColor,
+      Function()? onCancel,
+      Function()? onConfirm}) {
+    Get.defaultDialog(
+      backgroundColor: AppColors.whiteColor,
+      radius: 8,
+      title: title,
+      titlePadding: const EdgeInsets.only(top: 15.0),
+      content: widget,
+      titleStyle: AppStyles().font18(),
+      textCancel: textCancel,
+      textConfirm: textConfirm,
+      barrierDismissible: false,
+      onCancel: onCancel,
+      onConfirm: onConfirm,
     );
   }
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopingapi/constant/colors_app.dart';
 import 'package:shopingapi/get/image_getx_controller.dart';
 import 'package:shopingapi/util/helper.dart';
+import 'package:shopingapi/widgets/widget_loadidng.dart';
 
 class ImagesScreen extends StatefulWidget {
   const ImagesScreen({super.key});
@@ -16,16 +18,19 @@ class _ImagesScreenState extends State<ImagesScreen> with Helper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('images'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.toNamed('/upload_image_screen');
-            },
-            icon: const Icon(Icons.camera_alt),
-          )
-        ],
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 80.0),
+        child: FloatingActionButton(
+          backgroundColor: AppColors.KPrimaryColor,
+          onPressed: () {
+            Get.toNamed('/upload_image_screen');
+          },
+          child: const Icon(
+            Icons.add,
+            color: AppColors.whiteColor,
+          ),
+        ),
       ),
       body: GetX<ImagesGetxController>(
         builder: (controller) {
@@ -34,7 +39,6 @@ class _ImagesScreenState extends State<ImagesScreen> with Helper {
               child: CircularProgressIndicator(),
             );
           } else if (_getxController.images.isNotEmpty) {
-            print('object');
             return GridView.builder(
               itemCount: _getxController.images.length,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -102,8 +106,10 @@ class _ImagesScreenState extends State<ImagesScreen> with Helper {
     );
   }
 
-  Future<void> _deleteImage({required int index}) async {
-    if (_getxController.loading.isTrue) {}
-    await _getxController.deleteImage(context, index: index);
+  _deleteImage({required int index}) {
+    _getxController.deleteImage(context, index: index);
+    if (_getxController.loading.isTrue) {
+      WidgetLoadding(context);
+    }
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopingapi/api/controllers/auth_api_controller.dart';
 import 'package:shopingapi/constant/colors_app.dart';
-import 'package:shopingapi/screen/auth%20screen/reset_password_screen.dart';
+import 'package:shopingapi/view/screen/auth%20screen/reset_password_screen.dart';
 import 'package:shopingapi/util/helper.dart';
 import 'package:shopingapi/widgets/custom_form_button.dart';
 import 'package:shopingapi/widgets/custom_text_field.dart';

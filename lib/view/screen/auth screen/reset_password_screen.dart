@@ -36,7 +36,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> with Helper {
 
   getcode() async {
     var sharedPrf = await SharedPreferences.getInstance();
-
     showMyDiloag(text: "${sharedPrf.getString('code')}");
   }
 

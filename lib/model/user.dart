@@ -1,23 +1,3 @@
-// class News {
-//   late String author;
-//   late String title;
-//   //  void description;
-//   late String url;
-//   //  void urlToImage;
-//   late String publishedAt;
-//   // void content;
-
-//   News.fromJson(Map<String, dynamic> json) {
-//     author = json['author'];
-//     title = json['title'];
-//     // description = json['description'];
-//     url = json['url'];
-//     // urlToImage = json['urlToImage'];
-//     publishedAt = json['publishedAt'];
-//     // content = json['content'];
-//   }
-// }
-
 class User {
   late int id;
   late String firstName;
