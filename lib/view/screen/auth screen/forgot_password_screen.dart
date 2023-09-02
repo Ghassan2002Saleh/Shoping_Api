@@ -55,7 +55,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                         height: 40,
                       ),
                       CustomFormButton(
-                          innerText: 'Login'.toUpperCase(),
+                          innerText: 'Check'.toUpperCase(),
                           onPressed: _forgotPassword),
                     ],
                   ),

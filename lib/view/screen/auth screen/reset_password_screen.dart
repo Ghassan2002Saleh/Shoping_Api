@@ -164,7 +164,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> with Helper {
                         height: 40,
                       ),
                       CustomFormButton(
-                          innerText: 'Login'.toUpperCase(),
+                          innerText: 'Save'.toUpperCase(),
                           onPressed: _resetPassword),
                     ],
                   ),
